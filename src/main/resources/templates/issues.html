@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issues page</title>
+</head>
+<body>
+    <h1>List of issues</h1>
+    <br>
+    <br>
+    <a href="readers">Readers</a>
+    <a href="books">Issues</a>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Issue id</th>
+            <th>Book id</th>
+            <th>Reader id</th>
+            <th>Issued at</th>
+            <th>Returned at</th>
+        </tr>
+        <tr th:each="issue: ${issues}">
+            <td th:text="${issue.getId()}"></td>
+            <td th:text="${issue.getBookId()}"></td>
+            <td th:text="${issue.getReaderId()}"></td>
+            <td th:text="${issue.getTimestamp()}"></td>
+            <td>   - </td>
+        </tr>
+    </table>
+</body>
+</html>

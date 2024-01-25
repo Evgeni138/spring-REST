@@ -8,6 +8,7 @@ import ru.gb.SpringREST.repository.BookRepository;
 import ru.gb.SpringREST.repository.IssueRepository;
 import ru.gb.SpringREST.repository.ReaderRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -36,6 +37,10 @@ public class IssuerService {
         return issueRepository.getIssues().stream().filter(it -> it.getId() == id)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public List<Issue> getAllIssues() {
+        return issueRepository.getIssues();
     }
 
 
