@@ -6,9 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import ru.gb.SpringREST.model.Issue;
-import ru.gb.SpringREST.service.IssuerService;
+import ru.gb.SpringREST.model.Issue2;
+import ru.gb.SpringREST.service.IssueService2;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -17,14 +18,14 @@ import java.util.NoSuchElementException;
 public class IssuerController {
 
     @Autowired
-    private IssuerService service;
+    private IssueService2 service;
 
     @PostMapping
-    public ResponseEntity<Issue> issuerBook(@RequestBody IssuerRequest request) {
+    public ResponseEntity<Issue2> issuerBook(@RequestBody IssuerRequest request) {
         log.info("Request for issuer received: readerId = {}, bookId = {}",
                 request.getReaderId(), request.getBookId());
 
-        final Issue issue;
+        final Issue2 issue;
         try {
             issue = service.issue(request);
         } catch (NoSuchElementException e) {
@@ -34,10 +35,10 @@ public class IssuerController {
     }
 
     @GetMapping(path = "/{id}")
-    public Issue getIssueById(@PathVariable long id) {
+    public Issue2 getIssueById(@PathVariable long id) {
         log.info("Request for getIssueById received with id: {}", id);
 
-        Issue issue = service.getIssue(id);
+        Issue2 issue = service.getIssueById(id);
 
         if (issue != null) {
             log.info("Found issue with id {}: {}", id, issue);
@@ -46,5 +47,10 @@ public class IssuerController {
             log.warn("Issue with id {} not found", id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Issue not found");
         }
+    }
+
+    @GetMapping
+    public List<Issue2> gelAllIssues() {
+        return service.getAllIssues();
     }
 }

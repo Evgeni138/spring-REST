@@ -6,15 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.gb.SpringREST.model.Book;
-import ru.gb.SpringREST.model.Issue;
-import ru.gb.SpringREST.model.Reader;
-import ru.gb.SpringREST.service.BookService;
-import ru.gb.SpringREST.service.IssuerService;
-import ru.gb.SpringREST.service.ReaderService;
+import ru.gb.SpringREST.model.*;
+import ru.gb.SpringREST.service.BookService2;
+import ru.gb.SpringREST.service.IssueService2;
+import ru.gb.SpringREST.service.ReaderService2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -23,17 +19,17 @@ import java.util.List;
 public class UIController {
 
     @Autowired
-    BookService bookService;
+    BookService2 bookService;
 
     @Autowired
-    ReaderService readerService;
+    ReaderService2 readerService;
 
     @Autowired
-    IssuerService issuerService;
+    IssueService2 issuerService;
 
     @GetMapping("/books")
     public String bookList(Model model) {
-        List<Book> books = bookService.getAllBooks();
+        List<Book2> books = bookService.getAllBooks();
 
         model.addAttribute("books", books);
         return "books";
@@ -41,7 +37,7 @@ public class UIController {
 
     @GetMapping("/readers")
     public String readerList(Model model) {
-        List<Reader> readers = readerService.getAllReaders();
+        List<Reader2> readers = readerService.getAllReaders();
 
         model.addAttribute("readers", readers);
         return "readers";
@@ -49,7 +45,7 @@ public class UIController {
 
     @GetMapping("/issues")
     public String issueList(Model model) {
-        List<Issue> issues = issuerService.getAllIssues();
+        List<Issue2> issues = issuerService.getAllIssues();
 
         model.addAttribute("issues", issues);
         return "issues";

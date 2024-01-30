@@ -1,4 +1,13 @@
 server:
   port: 8280
-application:
-  max-allowed-books: 1
+spring:
+  datasource:
+    url: jdbc:h2:mem:test
+    username: newuser
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    show-sql: true
+  h2:
+    console:
+      enabled: true
