@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import ru.gb.SpringREST.model.Issue2;
-import ru.gb.SpringREST.model.Reader2;
-import ru.gb.SpringREST.service.ReaderService2;
+import ru.gb.SpringREST.model.Issue;
+import ru.gb.SpringREST.model.Reader;
+import ru.gb.SpringREST.service.ReaderService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,18 +18,18 @@ import java.util.stream.Collectors;
 public class ReaderController {
 
     @Autowired
-    ReaderService2 service;
+    ReaderService service;
 
     @GetMapping
-    public List<Reader2> getAllReaders() {
+    public List<Reader> getAllReaders() {
         return service.getAllReaders();
     }
 
     @GetMapping(path = "/{id}")
-    public Reader2 getReaderById(@PathVariable long id) {
+    public Reader getReaderById(@PathVariable long id) {
         log.info("Request for getReaderById received with id: {}", id);
 
-        Reader2 reader = service.getReaderById(id);
+        Reader reader = service.getReaderById(id);
 
         if (reader != null) {
             log.info("Found reader with id {}: {}", id, reader);
@@ -44,7 +44,7 @@ public class ReaderController {
     public void deleteReader(@PathVariable long id) {
         log.info("Request for deleteReader with id: {}", id);
 
-        Reader2 reader = service.getReaderById(id);
+        Reader reader = service.getReaderById(id);
 
         if (reader != null) {
             log.info("Found book with id {}: {} and deleted", id, reader.getName());
@@ -56,17 +56,17 @@ public class ReaderController {
     }
 
     @PostMapping
-    public Reader2 addNewReader(@RequestBody Reader2 reader) {
-        Reader2 newReader = service.addReader(reader.getName());
+    public Reader addNewReader(@RequestBody Reader reader) {
+        Reader newReader = service.addReader(reader.getName());
         return newReader;
     }
 
     @GetMapping(path = "/{id}/issue")
-    public List<Issue2> getIssuesOfReaderById(@PathVariable long id) {
+    public List<Issue> getIssuesOfReaderById(@PathVariable long id) {
         log.info("Request for getReaderById received with id: {}", id);
 
-        Reader2 reader = service.getReaderById(id);
-        List<Issue2> issues = service.getIssueRepository().getAllIssues().stream()
+        Reader reader = service.getReaderById(id);
+        List<Issue> issues = service.getIssueRepository().getAllIssues().stream()
                 .filter(it -> it.getReaderId() == id)
                 .collect(Collectors.toList());
 

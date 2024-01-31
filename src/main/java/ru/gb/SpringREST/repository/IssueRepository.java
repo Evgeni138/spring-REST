@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.gb.SpringREST.model.Issue2;
+import ru.gb.SpringREST.model.Issue;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface IssueRepository2 extends JpaRepository<Issue2, Long> {
+public interface IssueRepository extends JpaRepository<Issue, Long> {
 
     @Modifying
     @Transactional
@@ -22,10 +22,10 @@ public interface IssueRepository2 extends JpaRepository<Issue2, Long> {
                       @Param("timestamp") LocalDateTime timestamp);
 
     @Query(nativeQuery = true, value = "SELECT * FROM issues")
-    public List<Issue2> getAllIssues();
+    public List<Issue> getAllIssues();
 
     @Query(nativeQuery = true, value = "SELECT * FROM issues WHERE id = :queryId")
-    public Issue2 getIssueById(@Param("queryId") Long queryId);
+    public Issue getIssueById(@Param("queryId") Long queryId);
 
     @Query(nativeQuery = true, value = "DELETE FROM issues WHERE id = :queryId")
     public void deleteIssue(@Param("queryId") Long queryId);

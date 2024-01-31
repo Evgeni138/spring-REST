@@ -5,20 +5,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.gb.SpringREST.model.Reader2;
-import ru.gb.SpringREST.repository.IssueRepository2;
-import ru.gb.SpringREST.repository.ReaderRepository2;
+import ru.gb.SpringREST.model.Reader;
+import ru.gb.SpringREST.repository.IssueRepository;
+import ru.gb.SpringREST.repository.ReaderRepository;
 
 import java.util.List;
 
 @Service
 @Getter
 @RequiredArgsConstructor
-public class ReaderService2 {
+public class ReaderService {
 
     @Autowired
-    private final ReaderRepository2 readerRepository;
-    private final IssueRepository2 issueRepository;
+    private final ReaderRepository readerRepository;
+    private final IssueRepository issueRepository;
 
     @Transactional
     public void init() {
@@ -27,11 +27,11 @@ public class ReaderService2 {
         readerRepository.addNewReader("Алиса");
     }
 
-    public List<Reader2> getAllReaders() {
+    public List<Reader> getAllReaders() {
         return readerRepository.getAllReaders();
     }
 
-    public Reader2 getReaderById(Long id) {
+    public Reader getReaderById(Long id) {
         return readerRepository.getReaderById(id);
     }
 
@@ -40,9 +40,9 @@ public class ReaderService2 {
     }
 
     @Transactional
-    public Reader2 addReader(String name) {
+    public Reader addReader(String name) {
         readerRepository.addNewReader(name);
-        List<Reader2> readers = readerRepository.getAllReaders();
+        List<Reader> readers = readerRepository.getAllReaders();
         return readers.get(readers.size() - 1);
     }
 }

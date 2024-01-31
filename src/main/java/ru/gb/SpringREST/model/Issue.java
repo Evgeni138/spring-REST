@@ -3,7 +3,6 @@ package ru.gb.SpringREST.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "issues")
 @Data
 @AllArgsConstructor
-public class Issue2 {
+public class Issue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +26,13 @@ public class Issue2 {
     @Column(name = "TIMESTAMP")
     private LocalDateTime timestamp;
 
-    public Issue2(long bookId, long readerId) {
+    public Issue(long bookId, long readerId) {
         this.bookId = bookId;
         this.readerId = readerId;
         this.timestamp = LocalDateTime.now();
     }
 
-    public Issue2() {
+    public Issue() {
 
     }
 }

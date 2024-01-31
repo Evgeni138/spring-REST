@@ -6,18 +6,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.gb.SpringREST.model.Reader2;
+import ru.gb.SpringREST.model.Reader;
 
 import java.util.List;
 
 @Repository
-public interface ReaderRepository2 extends JpaRepository<Reader2, Long> {
+public interface ReaderRepository extends JpaRepository<Reader, Long> {
 
     @Query(nativeQuery = true, value = "SELECT id, name FROM readers")
-    public List<Reader2> getAllReaders();
+    public List<Reader> getAllReaders();
 
     @Query(nativeQuery = true, value = "SELECT * FROM readers WHERE id = :queryId")
-    public Reader2 getReaderById(@Param("queryId") Long queryId);
+    public Reader getReaderById(@Param("queryId") Long queryId);
 
     @Modifying
     @Transactional

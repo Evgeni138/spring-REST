@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book2 {
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Book2 {
     @Column(name = "name")
     private String name;
 
-    public Book2(String name) {
+    public Book(String name) {
         this.name = name;
     }
 

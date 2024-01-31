@@ -7,9 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.gb.SpringREST.model.*;
-import ru.gb.SpringREST.service.BookService2;
-import ru.gb.SpringREST.service.IssueService2;
-import ru.gb.SpringREST.service.ReaderService2;
+import ru.gb.SpringREST.service.BookService;
+import ru.gb.SpringREST.service.IssueService;
+import ru.gb.SpringREST.service.ReaderService;
 
 import java.util.List;
 
@@ -19,17 +19,17 @@ import java.util.List;
 public class UIController {
 
     @Autowired
-    BookService2 bookService;
+    BookService bookService;
 
     @Autowired
-    ReaderService2 readerService;
+    ReaderService readerService;
 
     @Autowired
-    IssueService2 issuerService;
+    IssueService issuerService;
 
     @GetMapping("/books")
     public String bookList(Model model) {
-        List<Book2> books = bookService.getAllBooks();
+        List<Book> books = bookService.getAllBooks();
 
         model.addAttribute("books", books);
         return "books";
@@ -37,7 +37,7 @@ public class UIController {
 
     @GetMapping("/readers")
     public String readerList(Model model) {
-        List<Reader2> readers = readerService.getAllReaders();
+        List<Reader> readers = readerService.getAllReaders();
 
         model.addAttribute("readers", readers);
         return "readers";
@@ -45,7 +45,7 @@ public class UIController {
 
     @GetMapping("/issues")
     public String issueList(Model model) {
-        List<Issue2> issues = issuerService.getAllIssues();
+        List<Issue> issues = issuerService.getAllIssues();
 
         model.addAttribute("issues", issues);
         return "issues";
