@@ -1,5 +1,7 @@
 package ru.gb.SpringREST.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +17,14 @@ import java.util.NoSuchElementException;
 @Slf4j
 @RestController
 @RequestMapping("/issue")
+@Tag(name = "Issues")
 public class IssuerController {
 
     @Autowired
     private IssueService service;
 
     @PostMapping
+    @Operation(summary = "add new issue", description = "Создает запись в систему о новой выдачи книги читателю")
     public ResponseEntity<Issue> issuerBook(@RequestBody IssuerRequest request) {
         log.info("Request for issuer received: readerId = {}, bookId = {}",
                 request.getReaderId(), request.getBookId());
@@ -35,6 +39,7 @@ public class IssuerController {
     }
 
     @GetMapping(path = "/{id}")
+    @Operation(summary = "get issue by id", description = "Загружает данные о выдаче книги по идентификатору")
     public Issue getIssueById(@PathVariable long id) {
         log.info("Request for getIssueById received with id: {}", id);
 
@@ -50,6 +55,7 @@ public class IssuerController {
     }
 
     @GetMapping
+    @Operation(summary = "get all issues", description = "Загружает данные о всех выдачах книг из системы")
     public List<Issue> gelAllIssues() {
         return service.getAllIssues();
     }

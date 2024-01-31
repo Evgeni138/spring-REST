@@ -1,5 +1,7 @@
 package ru.gb.SpringREST.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,17 +17,20 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/reader")
+@Tag(name = "Readers")
 public class ReaderController {
 
     @Autowired
     ReaderService service;
 
     @GetMapping
+    @Operation(summary = "get all readers", description = "Загружает всех читателей, которые есть в системе")
     public List<Reader> getAllReaders() {
         return service.getAllReaders();
     }
 
     @GetMapping(path = "/{id}")
+    @Operation(summary = "get reader by id", description = "Загружает данные читателя по его идентификатору")
     public Reader getReaderById(@PathVariable long id) {
         log.info("Request for getReaderById received with id: {}", id);
 
@@ -41,6 +46,7 @@ public class ReaderController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @Operation(summary = "delete reader", description = "Удаляет читателя из системы по идентификатору")
     public void deleteReader(@PathVariable long id) {
         log.info("Request for deleteReader with id: {}", id);
 
@@ -56,12 +62,15 @@ public class ReaderController {
     }
 
     @PostMapping
+    @Operation(summary = "add new reader", description = "Добавляет нового читателя в систему")
     public Reader addNewReader(@RequestBody Reader reader) {
         Reader newReader = service.addReader(reader.getName());
         return newReader;
     }
 
     @GetMapping(path = "/{id}/issue")
+    @Operation(summary = "get issues by reader id", description = "Загружает данные о всех выдачах книг читателю" +
+            " по его идентификатору")
     public List<Issue> getIssuesOfReaderById(@PathVariable long id) {
         log.info("Request for getReaderById received with id: {}", id);
 
