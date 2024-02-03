@@ -2,6 +2,7 @@ package ru.gb.SpringREST.api;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,7 @@ public class UIController {
     }
 
     @GetMapping("/readers")
+    @Secured({"user", "admin"})
     public String readerList(Model model) {
         List<Reader> readers = readerService.getAllReaders();
 
@@ -44,6 +46,7 @@ public class UIController {
     }
 
     @GetMapping("/issues")
+    @Secured("admin")
     public String issueList(Model model) {
         List<Issue> issues = issuerService.getAllIssues();
 
