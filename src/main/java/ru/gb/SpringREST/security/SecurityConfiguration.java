@@ -18,7 +18,8 @@ public class SecurityConfiguration {
                                 .requestMatchers("/ui/issues/**").hasAuthority("admin")
                                 .requestMatchers("/ui/readers/**").hasAnyAuthority("user", "admin")
                                 .requestMatchers("/ui/books").permitAll()
-                                .anyRequest().denyAll()
+                                .requestMatchers("/**").permitAll()
+//                                .anyRequest().denyAll()
                 )
                 .formLogin(Customizer.withDefaults())
                 .build();
